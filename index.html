@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('https://t4.ftcdn.net/jpg/04/94/85/25/360_F_494852538_r8ylVApdAY0YuWYCkWIsg5pDZkboERYI.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #164154;
+    text-shadow: 2px 2px 5px rgba(139, 133, 133, 0.763);
+    margin-bottom: 20px;
+}
+
+.calculator {
+    width: 280px;
+    border: 3px solid #000;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: rgba(139, 225, 230, 0.9);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+input {
+    width: 100%;
+    height: 45px;
+    margin-bottom: 15px;
+    font-size: 22px;
+    text-align: right;
+    border-radius: 8px;
+    border: 2px solid #333;
+    padding-right: 10px;
+    background-color: #bad4eb;
+}
+
+button {
+    width: 55px;
+    height: 45px;
+    margin: 5px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2295dc;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #5aa0d9;
+    color: white;
+}
+
+button.clear {
+    background-color: #ff6347;
+}
+button.clear:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+button.equal {
+    background-color: #32cd32;
+}
+button.equal:hover {
+    background-color: #228b22;
+    color: white;
+}
+</style>
+</head>
+<body>
+<h1>Calculator</h1>
+
+<div class="calculator">
+    <input type="text" id="display" readonly>
+    <br>
+
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button onclick="appendValue('+')">+</button>
+    <br>
+
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button onclick="appendValue('-')">-</button>
+    <br>
+
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="appendValue('*')">*</button>
+    <br>
+
+    <button onclick="appendValue('%')">%</button>
+    <button onclick="appendValue('0')">0</button>
+    <button class="equal" onclick="calculate()">=</button>
+    <button onclick="appendValue('/')">/</button>
+    <br>
+
+    <button class="clear" onclick="clearDisplay()">C</button>
+</div>
+
+<script>
+const display = document.getElementById("display");
+
+function appendValue(value) {
+    display.value += value;
+}
+
+function clearDisplay() {
+    display.value = "";
+}
+
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
+    }
+}
+
+document.addEventListener("keydown", function(event) {
+    const key = event.key;
+
+    if ((key >= "0" && key <= "9") || ["+", "-", "*", "/", "%", "."].includes(key)) {
+        display.value += key;
+    } else if (key === "Enter") {
+        calculate();
+    } else if (key === "Backspace") {
+        display.value = display.value.slice(0, -1);
+    } else if (key.toLowerCase() === "c") {
+        clearDisplay();
+    }
+});
+</script>
+<h3>Designed by Himank Bhardwaj</h3>
+</body>
+</html>
